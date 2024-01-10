@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class FPSController : MonoBehaviour
+
+public class CharacterMouvement : MonoBehaviour
 {
     public Camera playerCamera;
     public float walkSpeed = 6f;
@@ -11,16 +13,13 @@ public class FPSController : MonoBehaviour
     public float jumpPower = 7f;
     public float gravity = 10f;
 
-
     public float lookSpeed = 2f;
-    public float lookXLimit = 45f;
-
+    public float lookXLimit = 75f;
 
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
     public bool canMove = true;
-
 
     CharacterController characterController;
     void Start()
@@ -33,11 +32,10 @@ public class FPSController : MonoBehaviour
     void Update()
     {
 
-        #region Handles Movment
+        #region Handles Movement
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-        // Press Left Shift to run
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
         float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
