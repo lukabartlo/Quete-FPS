@@ -14,9 +14,6 @@ public class AttackController : MonoBehaviour
         if (Time.timeScale == 0)
             return;
 
-        /*if (characters.CurrentCD > 0f)
-            return;*/
-
         if (Input.GetMouseButtonDown(0))
         {
             shooting.Attack();

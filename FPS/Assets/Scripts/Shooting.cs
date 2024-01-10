@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Events;
 using UnityEngine.TextCore.Text;
 
 public class Shooting : MonoBehaviour
 {
     private Bullet bullet;
+    public GameObject pistol;
 
     public float AtkDistance;
     public ShootingEffect[] OnAttackComplete;
@@ -18,15 +20,27 @@ public class Shooting : MonoBehaviour
         bullet = GetComponent<Bullet>();
     }
 
+    private void Update()
+    {
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, AtkDistance))
+        {
+            pistol.transform.LookAt(hit.point);
+        }
+        else
+        {
+            pistol.transform.localEulerAngles = Vector3.zero;
+        }
+    }
+
     public void Attack()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out var hit, AtkDistance))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, AtkDistance))
         {
             GameObject eHit = hit.collider.gameObject;
-            if (eHit.TryGetComponent<EnemyStat>(out var stat))
+         /* if (eHit.TryGetComponent<EnemyStat>(out var stat))
             {
                 stat.TakeDmg(bullet.BulletDamage);
-            }
+            }*/
         }
 
         if (OnAttackComplete.Length > 0)
