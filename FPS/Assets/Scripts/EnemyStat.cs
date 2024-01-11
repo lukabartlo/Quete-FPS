@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class EnemyStat : MonoBehaviour
 {
-    public float MaxAtk = 1;
+    public float MaxAtk = 1f;
 
-    public float MaxHp = 50;
+    public float MaxHp = 30f;
 
-    public float MaxSpeed = 20;
+    public float MaxSpeed = 20f;
 
-    public float CurrentAtk { get; private set; }
+    public float CurrentAtk;
 
-    public float CurrentHp { get; private set; }
+    public float CurrentHp;
 
-    public float CurrentSPD { get; private set; }
+    public float CurrentSPD;
 
     public void Start()
     {
@@ -23,13 +23,7 @@ public class EnemyStat : MonoBehaviour
         CurrentSPD = MaxSpeed;
     }
 
-    public void TakeDmg(float BulletDmg)
-    {
-        CurrentHp -= BulletDmg;
-    }
 
-    public bool IsAlive()
-    {
-        return CurrentHp > 0;
-    }
+
+    
 }

@@ -12,6 +12,7 @@ public class CharacterMouvement : MonoBehaviour
     public float runSpeed = 12f;
     public float jumpPower = 7f;
     public float gravity = 10f;
+    public float JumpAmount = 2f;
 
     public float lookSpeed = 2f;
     public float lookXLimit = 75f;
@@ -45,9 +46,10 @@ public class CharacterMouvement : MonoBehaviour
         #endregion
 
         #region Handles Jumping
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        if (Input.GetButtonDown("Jump") && canMove && (characterController.isGrounded || JumpAmount > 0f))
         {
             moveDirection.y = jumpPower;
+            JumpAmount -= 1f;
         }
         else
         {
@@ -57,6 +59,10 @@ public class CharacterMouvement : MonoBehaviour
         if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
+        }
+        else if (characterController.isGrounded)
+        {
+            JumpAmount = 1f;
         }
 
         #endregion

@@ -6,11 +6,9 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
-public class Bullet : MonoBehaviour
+public class EnnemyBullet : MonoBehaviour
 {
-    public float BulletDamage = 5f;
-
-    public Action<EnemyStat> onEnemyKill;
+    public float EnemyBulletDMG = 5f;
 
     public float Lifespan = 1.5f;
 
@@ -22,9 +20,9 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject gHit = collision.gameObject;
-        if (gHit.TryGetComponent<EnnemyAI>(out var stat))
+        if (gHit.TryGetComponent<Character>(out var stat))
         {
-            stat.TakeDmg(BulletDamage);
+            stat.TakeDmg(EnemyBulletDMG);
             if (!stat.IsAlive())
             {
                 Destroy(gHit);

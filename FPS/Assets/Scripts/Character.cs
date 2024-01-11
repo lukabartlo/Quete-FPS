@@ -20,14 +20,10 @@ public class Character : MonoBehaviour
 
     public float CDShooting;
 
-    //[HideInInspector] public bool CanTakeDamage = true;
-
     private void Start()
     {
         CharacterStats();
     }
-
-    //public void SetCanTakeDamage(bool enable) => CanTakeDamage = enable;
 
     public void CharacterStats()
     {
@@ -40,13 +36,10 @@ public class Character : MonoBehaviour
         CurrentHp = MaxHp;
     }
 
-    /*public void TakeDmg(float enemyDMG)
+    public void TakeDmg(float enemyBulletDMG)
     {
-        if (!CanTakeDamage)
-            return;
-
-        CurrentHp -= enemyDMG;
-    }*/
+        CurrentHp -= enemyBulletDMG;
+    }
 
     public void SetHealthPoint(float newHealthPoint)
     {
