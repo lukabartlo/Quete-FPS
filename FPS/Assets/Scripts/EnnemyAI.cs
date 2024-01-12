@@ -14,6 +14,8 @@ public class EnnemyAI : MonoBehaviour
 
     public GameObject Projectile;
 
+    public GameObject enemyBulletPoint;
+
     public EnemyStat enemyStat;
 
     public Vector3 walkpoint;
@@ -96,9 +98,8 @@ public class EnnemyAI : MonoBehaviour
         transform.LookAt(player);
         if (!alreadyAttacked) 
         { 
-            Rigidbody rb = Instantiate(Projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+            Rigidbody rb = Instantiate(Projectile, enemyBulletPoint.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * 30f, ForceMode.Impulse);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), TimeBetweenAttacks);

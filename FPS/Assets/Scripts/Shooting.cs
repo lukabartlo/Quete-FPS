@@ -37,10 +37,6 @@ public class Shooting : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, AtkDistance))
         {
             GameObject eHit = hit.collider.gameObject;
-         /* if (eHit.TryGetComponent<EnemyStat>(out var stat))
-            {
-                stat.TakeDmg(bullet.BulletDamage);
-            }*/
         }
 
         if (OnAttackComplete.Length > 0)
